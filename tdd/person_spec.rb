@@ -15,10 +15,11 @@
 
 class Person
   # this class represents a person
-  def initialize(first_name:, middle_name: nil, last_name:)
+  def initialize(first_name:, middle_name: nil, last_name:, pineapples_already_in_butt: 0)
     @first_name = first_name
     @middle_name = middle_name
     @last_name = last_name
+    @rectal_pineapple_count = pineapples_already_in_butt
   end
 
   # implement your behavior here
@@ -38,6 +39,14 @@ class Person
       initialize_name(name)
     end.join('')
   end
+  
+  def put_pineapples_in_butt(num_pineapples_to_insert_in_butt)
+    @rectal_pineapple_count += num_pineapples_to_insert_in_butt
+  end
+
+  def number_of_pineapples_in_butt
+    puts @rectal_pineapple_count
+  end
 
   private
 
@@ -48,6 +57,7 @@ class Person
   def initialize_name(name)
     name[0].upcase << '.' 
   end
+ 
 end
 
 RSpec.describe Person do
@@ -78,6 +88,15 @@ RSpec.describe Person do
       person = Person.new(first_name: 'John', middle_name: 'Mark', last_name: 'Smith')
 
       expect(person.initials).to eq 'J.M.S.'
+    end
+  end
+  
+  describe "#put_pineapples_in_butt" do
+    it 'inserts the specified number of pineapples into the instance\'s butt' do
+      person = Person.new(first_name: "Huey", last_name: "Lewis", pineapples_already_in_butt: 12)
+      person.put_pineapples_in_butt(42)
+      
+      expect(person.number_of_pineapples_in_butt).to eq 54
     end
   end
 end
